@@ -16,6 +16,7 @@ public class EndPointsAPI {
     public static final String CUSTOMER_ID = "/api/aluno/{customerId}";
 
     public static final String CONTRACT = "/api/contrato";
+    public static final String CONTRACT_TOTALS = "/api/contrato/totals";
     public static final String CONTRACTS_OF_USER = "/api/contrato/{customerId}";
     public static final String CONTRACT_ID = "/api/contrato/{contractId}";
     public static final String CONTRACT_LAST_BY_USER = "/api/contrato/last/{customerId}";
