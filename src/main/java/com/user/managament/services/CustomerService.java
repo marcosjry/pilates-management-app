@@ -19,6 +19,8 @@ public interface CustomerService {
 
     Customer findCustomerById(UUID customerId) throws CustomerDoesntExistsException;
 
+    Long getDashboardTotalsCustomers();
+
     Page<CustomerDTO> searchCustomers(String query, Pageable pageable);
 
     boolean existsByEmail(String email);

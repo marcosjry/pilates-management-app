@@ -1,5 +1,6 @@
 package com.user.managament.services;
 
+import com.user.managament.DTO.contract.ActiveContractsWithCustomersDTO;
 import com.user.managament.DTO.contract.ContractDTO;
 import com.user.managament.DTO.contract.ContractToCreateDTO;
 import com.user.managament.DTO.contract.ContractToEditDTO;
@@ -16,6 +17,8 @@ public interface ContractService {
 
     List<ContractDTO> getContractsFromCustomerId(UUID customerId);
     List<ContractDTO> findLastContractByCustomerId(UUID customerId);
+
+    ActiveContractsWithCustomersDTO getTotalActiveContractsAndClients();
 
     boolean existsById(UUID contractId);
 
