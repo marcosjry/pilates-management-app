@@ -1,5 +1,6 @@
 package com.user.managament.services.impl;
 
+import com.user.managament.DTO.contract.ActiveContractsWithCustomersDTO;
 import com.user.managament.DTO.contract.ContractDTO;
 import com.user.managament.DTO.contract.ContractToCreateDTO;
 import com.user.managament.DTO.contract.ContractToEditDTO;
@@ -161,6 +162,14 @@ public class ContractServiceImpl implements ContractService {
         } catch (ContractDoesntExistsException e) {
             return List.of();
         }
+    }
+
+    @Override
+    public ActiveContractsWithCustomersDTO getTotalActiveContractsAndClients() {
+        Long totalActiveContracts = this.contractRepository.getDashboardTotalsActiveContracts();
+        Long totalCustomers = this.customerService.getDashboardTotalsCustomers();
+
+        return new ActiveContractsWithCustomersDTO(totalCustomers, totalActiveContracts);
     }
 
     public Contract findLastContractForUser(UUID customerId) throws ContractDoesntExistsException {

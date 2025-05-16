@@ -124,6 +124,11 @@ public class CustomerServiceImpl implements CustomerService {
         return this.customerRepository.findById(customerId).orElseThrow(() -> new CustomerDoesntExistsException("Customer doesnt Exists."));
     }
 
+    @Override
+    public Long getDashboardTotalsCustomers() {
+        return this.customerRepository.getDashboardTotalsCustomers();
+    }
+
     private Customer changeFieldsToEdit(CustomerToEdit customerToEdit, Customer customer) {
         if(SharedUtilClass.setPropToEdit(customerToEdit.classroomType()))
             customer.setClassroomType(ClassroomType.valueOf(customerToEdit.classroomType()));
