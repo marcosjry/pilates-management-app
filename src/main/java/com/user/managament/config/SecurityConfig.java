@@ -55,6 +55,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, EndPointsAPI.CONTRACT_ID).hasRole("USER")
                         .requestMatchers(HttpMethod.GET, EndPointsAPI.CONTRACTS_OF_USER).hasRole("USER")
                         .requestMatchers(HttpMethod.GET, EndPointsAPI.CONTRACT_LAST_BY_USER).hasRole("USER")
+                        .requestMatchers(HttpMethod.GET, EndPointsAPI.CONTRACT_TOTALS).hasRole("USER")
                         .requestMatchers(HttpMethod.POST, EndPointsAPI.CUSTOMER).hasRole("USER")
                         .requestMatchers(HttpMethod.GET, EndPointsAPI.CUSTOMER_SEARCH).hasRole("USER")
                         .requestMatchers(HttpMethod.PUT, EndPointsAPI.CUSTOMER_ID).hasRole("USER")

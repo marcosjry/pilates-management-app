@@ -1,5 +1,6 @@
 package com.user.managament.controller;
 
+import com.user.managament.DTO.contract.ActiveContractsWithCustomersDTO;
 import com.user.managament.DTO.contract.ContractDTO;
 import com.user.managament.DTO.contract.ContractToCreateDTO;
 import com.user.managament.DTO.contract.ContractToEditDTO;
@@ -50,6 +51,12 @@ public class ContractController {
     public ResponseEntity<Map<String, List<ContractDTO>>> getLastContractFromCustomer(@PathVariable UUID customerId) {
         List<ContractDTO> contractDTOList = contractService.findLastContractByCustomerId(customerId);
         return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("resposta", contractDTOList));
+    }
+
+    @GetMapping("/totals")
+    public ResponseEntity<Map<String, ActiveContractsWithCustomersDTO>> getTotalActiveContractsAndClients() {
+        ActiveContractsWithCustomersDTO dto = contractService.getTotalActiveContractsAndClients();
+        return ResponseEntity.status(HttpStatus.OK).body(Map.of("resposta", dto));
     }
 
 }
