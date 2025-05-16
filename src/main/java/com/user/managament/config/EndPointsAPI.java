@@ -1,0 +1,30 @@
+package com.user.managament.config;
+
+public class EndPointsAPI {
+    private EndPointsAPI() {
+        throw new UnsupportedOperationException("Classe utilitária.");
+    }
+
+    public static final String USER = "/api/usuario";
+
+    public static final String AUTH = "/api/auth";
+    public static final String AUTH_LOGIN = "/api/auth/login";
+    public static final String AUTH_DENIED = "/api/auth/access-error";
+
+    public static final String CUSTOMER = "/api/aluno";
+    public static final String CUSTOMER_SEARCH = "/api/aluno/search";
+    public static final String CUSTOMER_ID = "/api/aluno/{customerId}";
+
+    public static final String CONTRACT = "/api/contrato";
+    public static final String CONTRACTS_OF_USER = "/api/contrato/{customerId}";
+    public static final String CONTRACT_ID = "/api/contrato/{contractId}";
+    public static final String CONTRACT_LAST_BY_USER = "/api/contrato/last/{customerId}";
+
+    public static final String CLASSROOM = "/api/turma";
+    public static final String CLASSROOM_TODAY_CLASSES = "/api/turma/today-classes";
+    public static final String CLASSROOM_ID = "/api/turma/{id}";
+
+    public static final String FREQUENCY = "/api/frequencia";
+    public static final String FREQUENCY_ID = "/api/frequencia/{id}";
+
+}
