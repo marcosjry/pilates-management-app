@@ -1,20 +1,21 @@
 package com.user.managament.controller;
 
-import com.user.managament.util.PageResponse;
+import com.user.managament.DTO.customer.CustomersContractStatusDTO;
 import com.user.managament.DTO.customer.CustomerDTO;
 import com.user.managament.DTO.customer.CustomerToCreateDTO;
 import com.user.managament.DTO.customer.CustomerToEdit;
 import com.user.managament.config.EndPointsAPI;
+import com.user.managament.model.classroom.ClassroomType;
+import com.user.managament.model.contract.ContractStatus;
+import com.user.managament.model.contract.PaymentType;
 import com.user.managament.services.CustomerService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -49,19 +50,14 @@ public class CustomerController {
         return ResponseEntity.status(HttpStatus.OK).body(Map.of("cliente", customerDTO));
     }
 
-    @GetMapping("/search")
-    public ResponseEntity<PageResponse<CustomerDTO>> getCustomerByFilter(
-            @RequestParam String query,
-            @PageableDefault(page = 0, size = 10) Pageable pageable
+    @GetMapping("/filter")
+    public ResponseEntity<List<CustomersContractStatusDTO>> getCustomersAndLastContractsByFilter(
+            @RequestParam(required = false) ClassroomType roomType,
+            @RequestParam(required = false) ContractStatus status,
+            @RequestParam(required = false) PaymentType pType,
+            @RequestParam(required = false) String name
     ) {
-        Page<CustomerDTO> page = customerService.searchCustomers(query, pageable);
-        PageResponse<CustomerDTO> response = new PageResponse<>(
-                page.getContent(),
-                page.getNumber(),
-                page.getSize(),
-                page.getTotalElements(),
-                page.getTotalPages()
-        );
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+        List<CustomersContractStatusDTO> page = customerService.searchCustomersAndLastContractsByFilter(roomType, status, pType, name);
+        return ResponseEntity.status(HttpStatus.OK).body(page);
     }
 }

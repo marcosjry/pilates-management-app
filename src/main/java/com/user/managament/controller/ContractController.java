@@ -1,9 +1,6 @@
 package com.user.managament.controller;
 
-import com.user.managament.DTO.contract.ActiveContractsWithCustomersDTO;
-import com.user.managament.DTO.contract.ContractDTO;
-import com.user.managament.DTO.contract.ContractToCreateDTO;
-import com.user.managament.DTO.contract.ContractToEditDTO;
+import com.user.managament.DTO.contract.*;
 import com.user.managament.config.EndPointsAPI;
 import com.user.managament.services.ContractService;
 import jakarta.validation.Valid;
@@ -41,6 +38,12 @@ public class ContractController {
         return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("mensagem", "Contract deleted successfully"));
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<ContractsAndCustomerDTO>> getContract(@RequestParam String status) {
+        List<ContractsAndCustomerDTO> dto = contractService.getContracts(status);
+        return ResponseEntity.status(HttpStatus.CREATED).body(dto);
+    }
+
     @GetMapping("/{customerId}")
     public ResponseEntity<Map<String, List<ContractDTO>>> getContractsFromCustomer(@PathVariable UUID customerId) {
         List<ContractDTO> contractDTOList = contractService.getContractsFromCustomerId(customerId);
@@ -54,9 +57,15 @@ public class ContractController {
     }
 
     @GetMapping("/totals")
-    public ResponseEntity<Map<String, ActiveContractsWithCustomersDTO>> getTotalActiveContractsAndClients() {
+    public ResponseEntity<ActiveContractsWithCustomersDTO> getTotalActiveContractsAndClients() {
         ActiveContractsWithCustomersDTO dto = contractService.getTotalActiveContractsAndClients();
-        return ResponseEntity.status(HttpStatus.OK).body(Map.of("resposta", dto));
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @GetMapping("/expiring-contracts")
+    public ResponseEntity<List<ContractsExpiring>> getExpiringContractsWithClients() {
+        List<ContractsExpiring> dto = contractService.findExpiringContracts();
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
 }

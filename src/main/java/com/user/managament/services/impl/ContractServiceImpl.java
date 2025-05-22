@@ -1,9 +1,6 @@
 package com.user.managament.services.impl;
 
-import com.user.managament.DTO.contract.ActiveContractsWithCustomersDTO;
-import com.user.managament.DTO.contract.ContractDTO;
-import com.user.managament.DTO.contract.ContractToCreateDTO;
-import com.user.managament.DTO.contract.ContractToEditDTO;
+import com.user.managament.DTO.contract.*;
 import com.user.managament.exception.ContractDoesntExistsException;
 import com.user.managament.exception.CustomerDoesntExistsException;
 import com.user.managament.model.contract.Contract;
@@ -45,6 +42,13 @@ public class ContractServiceImpl implements ContractService {
     @Override
     public Contract findById(UUID id) throws ContractDoesntExistsException {
         return this.contractRepository.findById(id).orElseThrow(() -> new ContractDoesntExistsException("Contract doesnt Exist."));
+    }
+
+    @Override
+    public List<ContractsExpiring> findExpiringContracts() {
+        LocalDate start = LocalDate.now();
+        LocalDate end = start.plusDays(7);
+        return this.contractRepository.getContractsWithClientsExpiring(start, end);
     }
 
     @Transactional
@@ -126,6 +130,12 @@ public class ContractServiceImpl implements ContractService {
         } catch (ContractDoesntExistsException e) {
             throw new ContractDoesntExistsException(e.getMessage());
         }
+    }
+
+    @Override
+    public List<ContractsAndCustomerDTO> getContracts(String query) {
+        ContractStatus status = ContractStatus.fromString(query);
+        return this.contractRepository.getContractsWithClients(status);
     }
 
     @Override

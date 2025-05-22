@@ -2,12 +2,8 @@ package com.user.managament.controller;
 
 import com.user.managament.DTO.classroom.ClassroomToCreateDTO;
 import com.user.managament.DTO.classroom.ClassroomWithCountDTO;
-import com.user.managament.DTO.classroom.ReqClassroomWithCountDTO;
-import com.user.managament.DTO.customer.CustomerToCreateDTO;
-import com.user.managament.DTO.customer.CustomerToEdit;
 import com.user.managament.config.EndPointsAPI;
 import com.user.managament.services.ClassroomService;
-import com.user.managament.services.CustomerService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,8 +35,8 @@ public class ClassroomController {
     }
 
     @GetMapping("/today-classes")
-    public ResponseEntity<List<ClassroomWithCountDTO>> getClassWithCount(@RequestBody ReqClassroomWithCountDTO reqClassroomWithCountDTO) {
-        List<ClassroomWithCountDTO> classWithCount =  classroomService.findClassroomsWithStudents(reqClassroomWithCountDTO.date());
+    public ResponseEntity<List<ClassroomWithCountDTO>> getClassWithCount() {
+        List<ClassroomWithCountDTO> classWithCount =  classroomService.findClassroomsWithStudents(LocalDate.now());
         return ResponseEntity.status(HttpStatus.OK).body(classWithCount);
     }
 

@@ -2,7 +2,11 @@ package com.user.managament.repository;
 
 import com.user.managament.DTO.classroom.ClassroomWithCountDTO;
 import com.user.managament.DTO.contract.ActiveContractsWithCustomersDTO;
+import com.user.managament.DTO.contract.ContractsAndCustomerDTO;
+import com.user.managament.DTO.contract.ContractsExpiring;
 import com.user.managament.model.contract.Contract;
+import com.user.managament.model.contract.ContractStatus;
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -21,11 +25,6 @@ public interface ContractRepository extends JpaRepository<Contract, UUID> {
             """)
     List<Contract> getContractsFromCustomerId(@Param("customerId") UUID customerId);
 
-    @Query(""" 
-            SELECT c FROM Contract c WHERE c.customer.id = :customerId ORDER BY c.initDate desc
-            """)
-    List<Contract> getActiveContractsFromCustomerId(@Param("customerId") UUID customerId);
-
     Optional<Contract> findTopByCustomerIdOrderByInitDateDesc(UUID customerId);
 
     @Query(value = """
@@ -34,5 +33,34 @@ public interface ContractRepository extends JpaRepository<Contract, UUID> {
     JOIN table_customer cu ON cu.id = tc.customer_id
     """, nativeQuery = true)
     Long getDashboardTotalsActiveContracts();
+
+    @Query("""
+    SELECT new com.user.managament.DTO.contract.ContractsExpiring(
+        c.id,
+        c.name,
+        tc.endDate,
+        tc.contractStatus
+    )
+    FROM Contract tc
+    JOIN tc.customer c
+    WHERE tc.endDate BETWEEN :dateInit AND :end
+    """)
+    List<ContractsExpiring> getContractsWithClientsExpiring(@Param("dateInit") LocalDate dateInit, @Param("end") LocalDate end);
+
+    @Query("""
+    SELECT new com.user.managament.DTO.contract.ContractsAndCustomerDTO(
+        c.id,
+        c.name,
+        tc.id,
+        tc.initDate,
+        tc.endDate,
+        tc.contractStatus
+    )
+    FROM Contract tc
+    JOIN tc.customer c
+    WHERE (:status IS NULL OR tc.contractStatus = :status)
+    """)
+    List<ContractsAndCustomerDTO> getContractsWithClients(@Param("status") ContractStatus status);
+
 
 }
