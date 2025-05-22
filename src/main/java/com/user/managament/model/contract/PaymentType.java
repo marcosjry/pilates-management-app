@@ -4,7 +4,8 @@ public enum PaymentType {
     GYMPASS("GYMPASS"),
     CASH("DINHEIRO"),
     CC("CARTAO_CREDITO"),
-    CD("CARTAO_DEBITO");
+    CD("CARTAO_DEBITO"),
+    PIX("PIX");
 
     private final String paymentType;
 
