@@ -13,13 +13,16 @@ public class EndPointsAPI {
 
     public static final String CUSTOMER = "/api/aluno";
     public static final String CUSTOMER_SEARCH = "/api/aluno/search";
+    public static final String CUSTOMER_FILTER = "/api/aluno/filter";
     public static final String CUSTOMER_ID = "/api/aluno/{customerId}";
 
     public static final String CONTRACT = "/api/contrato";
+    public static final String CONTRACT_SEARCH = "/api/contrato/search";
     public static final String CONTRACT_TOTALS = "/api/contrato/totals";
     public static final String CONTRACTS_OF_USER = "/api/contrato/{customerId}";
     public static final String CONTRACT_ID = "/api/contrato/{contractId}";
     public static final String CONTRACT_LAST_BY_USER = "/api/contrato/last/{customerId}";
+    public static final String CONTRACTS_EXPIRING = "/api/contrato/expiring-contracts";
 
     public static final String CLASSROOM = "/api/turma";
     public static final String CLASSROOM_TODAY_CLASSES = "/api/turma/today-classes";
