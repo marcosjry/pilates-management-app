@@ -1,9 +1,11 @@
 package com.user.managament.model.customer;
 
 import com.user.managament.model.classroom.ClassroomType;
+import com.user.managament.model.contract.Contract;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -41,7 +43,18 @@ public class Customer {
     @Enumerated(EnumType.STRING)
     private ClassroomType classroomType;
 
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
+    private List<Contract> contracts;
+
     private LocalDate date;
+
+    public List<Contract> getContracts() {
+        return contracts;
+    }
+
+    public void setContracts(List<Contract> contracts) {
+        this.contracts = contracts;
+    }
 
     public LocalDate getDate() {
         return date;
