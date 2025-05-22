@@ -3,21 +3,23 @@ package com.user.managament.services.impl;
 import com.user.managament.DTO.customer.CustomerDTO;
 import com.user.managament.DTO.customer.CustomerToCreateDTO;
 import com.user.managament.DTO.customer.CustomerToEdit;
+import com.user.managament.DTO.customer.CustomersContractStatusDTO;
 import com.user.managament.exception.CustomerDoesntExistsException;
 import com.user.managament.model.classroom.ClassroomType;
+import com.user.managament.model.contract.ContractStatus;
+import com.user.managament.model.contract.PaymentType;
 import com.user.managament.model.customer.Customer;
+import com.user.managament.repository.ContractRepository;
 import com.user.managament.repository.CustomerRepository;
 import com.user.managament.services.CustomerService;
 import com.user.managament.util.SharedUtilClass;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.security.InvalidParameterException;
 import java.time.LocalDate;
-import java.util.Locale;
+import java.util.List;
 import java.util.UUID;
 import java.util.function.Function;
 
@@ -27,6 +29,8 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
+    @Autowired
+    private ContractRepository contractRepository;
 
     public void verifyProperties(String input, Function<String, Boolean> conversor, String mensagem) {
         boolean existsByInput = conversor.apply(input);
@@ -95,11 +99,10 @@ public class CustomerServiceImpl implements CustomerService {
             );
     }
 
-    public Page<CustomerDTO> searchCustomers(String query, Pageable pageable) {
-        return customerRepository.findByNameContainingIgnoreCase(query, pageable)
-                .map(CustomerDTO::fromEntity);
+    @Override
+    public List<CustomersContractStatusDTO> searchCustomersAndLastContractsByFilter(ClassroomType roomType, ContractStatus status, PaymentType pType, String name) {
+        return customerRepository.findCustomerContractsDTOByFilters(roomType, status, pType, name);
     }
-
 
     @Transactional
     public void deleteCustomer(UUID id) {
