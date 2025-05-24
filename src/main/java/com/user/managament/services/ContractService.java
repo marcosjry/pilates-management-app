@@ -13,7 +13,7 @@ public interface ContractService {
     void doesEditContract(UUID id, ContractToEditDTO contractToEditDTO);
     void doesDeleteContract(UUID contractId);
 
-    List<ContractsAndCustomerDTO> getContracts(String query);
+    List<ContractsAndCustomerDTO> getContracts(String query, String name);
 
     List<ContractDTO> getContractsFromCustomerId(UUID customerId);
     List<ContractDTO> findLastContractByCustomerId(UUID customerId);
@@ -26,4 +26,8 @@ public interface ContractService {
     Contract findById(UUID id) throws ContractDoesntExistsException;
 
     List<ContractsExpiring> findExpiringContracts();
+
+    MostRecentlyContractDTO findCustomerLastContractInfo(UUID customerId);
+
+    void expireDueContracts();
 }

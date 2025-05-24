@@ -12,10 +12,13 @@ import com.user.managament.services.ContractService;
 import com.user.managament.services.CustomerService;
 import com.user.managament.util.SharedUtilClass;
 import jakarta.transaction.Transactional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,6 +31,44 @@ public class ContractServiceImpl implements ContractService {
     @Autowired
     private CustomerService customerService;
 
+    private static final Logger log = LoggerFactory.getLogger(ContractService.class);
+
+    // Boa Prática: Definir o fuso horário de negócio centralmente
+    private static final ZoneId BUSINESS_ZONE_ID = ZoneId.of("America/Sao_Paulo");
+
+    @Transactional
+    public void expireDueContracts() {
+        // Obter a data atual no fuso horário de negócio definido
+        LocalDate today = LocalDate.now(BUSINESS_ZONE_ID);
+        log.info("Iniciando verificação de contratos expirados para datas anteriores a: {} (Fuso: {})", today, BUSINESS_ZONE_ID);
+
+        List<Contract> contractsToExpire = contractRepository.findByContractStatusAndEndDateLessThan(
+                ContractStatus.ACTIVE, // Usando seu enum
+                today
+        );
+
+        if (contractsToExpire.isEmpty()) {
+            log.info("Nenhum contrato encontrado para expirar.");
+            return;
+        }
+
+        log.info("Encontrados {} contratos para expirar.", contractsToExpire.size());
+
+        for (Contract contract : contractsToExpire) {
+            try {
+                log.info("Expirando contrato ID: {}, Cliente: {}, Data Fim: {}",
+                        contract.getId(), contract.getCustomer().getId(), contract.getEndDate()); // Ajustei o log
+
+                contract.setContractStatus(ContractStatus.EXPIRED); // Usando seu enum
+                contractRepository.save(contract);
+
+            } catch (Exception e) {
+                log.error("Erro ao expirar contrato ID: {}", contract.getId(), e);
+            }
+        }
+
+        log.info("Verificação de contratos expirados concluída.");
+    }
 
     @Override
     public void doesCreateContract(ContractToCreateDTO contractToCreateDTO) {
@@ -49,6 +90,11 @@ public class ContractServiceImpl implements ContractService {
         LocalDate start = LocalDate.now();
         LocalDate end = start.plusDays(7);
         return this.contractRepository.getContractsWithClientsExpiring(start, end);
+    }
+
+    @Override
+    public MostRecentlyContractDTO findCustomerLastContractInfo(UUID customerId) {
+        return this.contractRepository.findCustomerContractsDTOById(customerId);
     }
 
     @Transactional
@@ -133,9 +179,9 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
-    public List<ContractsAndCustomerDTO> getContracts(String query) {
+    public List<ContractsAndCustomerDTO> getContracts(String query, String name) {
         ContractStatus status = ContractStatus.fromString(query);
-        return this.contractRepository.getContractsWithClients(status);
+        return this.contractRepository.getContractsWithClients(status, name);
     }
 
     @Override

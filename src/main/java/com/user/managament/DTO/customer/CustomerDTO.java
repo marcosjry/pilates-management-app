@@ -9,8 +9,7 @@ public record CustomerDTO(
         String name,
         String cpf,
         String email,
-        String phone,
-        String classroomType) {
+        String phone) {
 
     public static CustomerDTO fromEntity(Customer customer) {
         return new CustomerDTO(
@@ -18,8 +17,7 @@ public record CustomerDTO(
                 customer.getName(),
                 customer.getCpf(),
                 customer.getEmail(),
-                customer.getPhone(),
-                customer.getClassroomType().toString()
+                customer.getPhone()
 
         );
     }
