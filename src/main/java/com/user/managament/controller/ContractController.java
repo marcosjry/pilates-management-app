@@ -39,15 +39,15 @@ public class ContractController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<ContractsAndCustomerDTO>> getContract(@RequestParam String status) {
-        List<ContractsAndCustomerDTO> dto = contractService.getContracts(status);
+    public ResponseEntity<List<ContractsAndCustomerDTO>> getContract(@RequestParam String status, @RequestParam(required = false) String name) {
+        List<ContractsAndCustomerDTO> dto = contractService.getContracts(status, name);
         return ResponseEntity.status(HttpStatus.CREATED).body(dto);
     }
 
     @GetMapping("/{customerId}")
     public ResponseEntity<Map<String, List<ContractDTO>>> getContractsFromCustomer(@PathVariable UUID customerId) {
         List<ContractDTO> contractDTOList = contractService.getContractsFromCustomerId(customerId);
-        return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("resposta", contractDTOList));
+        return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("contratos", contractDTOList));
     }
 
     @GetMapping("/last/{customerId}")
@@ -65,6 +65,12 @@ public class ContractController {
     @GetMapping("/expiring-contracts")
     public ResponseEntity<List<ContractsExpiring>> getExpiringContractsWithClients() {
         List<ContractsExpiring> dto = contractService.findExpiringContracts();
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @GetMapping("/info-user/{customerId}")
+    public ResponseEntity<MostRecentlyContractDTO> getLastContractInfo(@PathVariable UUID customerId) {
+        MostRecentlyContractDTO dto = contractService.findCustomerLastContractInfo(customerId);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
