@@ -94,8 +94,7 @@ public class CustomerServiceImpl implements CustomerService {
                     customer.getName(),
                     customer.getCpf(),
                     customer.getEmail(),
-                    customer.getPhone(),
-                    customer.getClassroomType().toString()
+                    customer.getPhone()
             );
     }
 
