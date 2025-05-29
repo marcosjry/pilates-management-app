@@ -1,5 +1,6 @@
 package com.user.managament.repository;
 
+import com.user.managament.DTO.classroom.ClassroomHoursAvailable;
 import com.user.managament.DTO.classroom.ClassroomWithCountDTO;
 import com.user.managament.model.classroom.Classroom;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -25,5 +26,16 @@ public interface ClassroomRepository extends JpaRepository<Classroom, UUID> {
     GROUP BY c.id, c.startTime, c.classroomType
     """)
     List<ClassroomWithCountDTO> findClassroomsWithStudentCountByDate(@Param("date") LocalDate date);
+
+    @Query("""
+    SELECT new com.user.managament.DTO.classroom.ClassroomHoursAvailable(
+        c.id,
+        c.classroomType,
+        c.startTime
+    )
+    FROM Classroom c
+    ORDER BY c.startTime ASC
+    """)
+    List<ClassroomHoursAvailable> findClassesHoursAvailable();
 
 }
