@@ -1,9 +1,6 @@
 package com.user.managament.services.impl;
 
-import com.user.managament.DTO.customer.CustomerDTO;
-import com.user.managament.DTO.customer.CustomerToCreateDTO;
-import com.user.managament.DTO.customer.CustomerToEdit;
-import com.user.managament.DTO.customer.CustomersContractStatusDTO;
+import com.user.managament.DTO.customer.*;
 import com.user.managament.exception.CustomerDoesntExistsException;
 import com.user.managament.model.classroom.ClassroomType;
 import com.user.managament.model.contract.ContractStatus;
@@ -101,6 +98,11 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public List<CustomersContractStatusDTO> searchCustomersAndLastContractsByFilter(ClassroomType roomType, ContractStatus status, PaymentType pType, String name) {
         return customerRepository.findCustomerContractsDTOByFilters(roomType, status, pType, name);
+    }
+
+    @Override
+    public List<CustomersFrequencyClassDTO> searchCustomersByFilter(ClassroomType roomType, PaymentType pType, String name) {
+        return this.customerRepository.findAvailableCustomersDTO(roomType, pType, name);
     }
 
     @Transactional

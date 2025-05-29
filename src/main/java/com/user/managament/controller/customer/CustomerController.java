@@ -1,9 +1,6 @@
-package com.user.managament.controller;
+package com.user.managament.controller.customer;
 
-import com.user.managament.DTO.customer.CustomersContractStatusDTO;
-import com.user.managament.DTO.customer.CustomerDTO;
-import com.user.managament.DTO.customer.CustomerToCreateDTO;
-import com.user.managament.DTO.customer.CustomerToEdit;
+import com.user.managament.DTO.customer.*;
 import com.user.managament.config.EndPointsAPI;
 import com.user.managament.model.classroom.ClassroomType;
 import com.user.managament.model.contract.ContractStatus;
@@ -58,6 +55,16 @@ public class CustomerController {
             @RequestParam(required = false) String name
     ) {
         List<CustomersContractStatusDTO> page = customerService.searchCustomersAndLastContractsByFilter(roomType, status, pType, name);
+        return ResponseEntity.status(HttpStatus.OK).body(page);
+    }
+
+    @GetMapping("/available")
+    public ResponseEntity<List<CustomersFrequencyClassDTO>> getCustomersAndLastContractsByFilter(
+            @RequestParam(required = false) ClassroomType roomType,
+            @RequestParam(required = false) PaymentType pType,
+            @RequestParam(required = false) String name
+    ) {
+        List<CustomersFrequencyClassDTO> page = customerService.searchCustomersByFilter(roomType, pType, name);
         return ResponseEntity.status(HttpStatus.OK).body(page);
     }
 }

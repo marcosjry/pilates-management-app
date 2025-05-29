@@ -1,9 +1,6 @@
 package com.user.managament.services;
 
-import com.user.managament.DTO.customer.CustomerDTO;
-import com.user.managament.DTO.customer.CustomerToCreateDTO;
-import com.user.managament.DTO.customer.CustomerToEdit;
-import com.user.managament.DTO.customer.CustomersContractStatusDTO;
+import com.user.managament.DTO.customer.*;
 import com.user.managament.exception.CustomerDoesntExistsException;
 import com.user.managament.model.classroom.ClassroomType;
 import com.user.managament.model.contract.ContractStatus;
@@ -25,6 +22,8 @@ public interface CustomerService {
     Long getDashboardTotalsCustomers();
 
     List<CustomersContractStatusDTO> searchCustomersAndLastContractsByFilter(ClassroomType roomType, ContractStatus status, PaymentType pType, String name);
+
+    List<CustomersFrequencyClassDTO> searchCustomersByFilter(ClassroomType roomType, PaymentType pType, String name);
 
     boolean existsByEmail(String email);
     boolean existsByCpf(String cpf);
