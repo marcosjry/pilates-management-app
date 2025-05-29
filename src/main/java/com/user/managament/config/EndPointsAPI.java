@@ -27,10 +27,14 @@ public class EndPointsAPI {
     public static final String CONTRACTS_EXPIRING = "/api/contrato/expiring-contracts";
 
     public static final String CLASSROOM = "/api/turma";
+    public static final String CLASSROOM_HOURS_AVAILABLE = "/api/turma/hours-available";
     public static final String CLASSROOM_TODAY_CLASSES = "/api/turma/today-classes";
     public static final String CLASSROOM_ID = "/api/turma/{id}";
 
     public static final String FREQUENCY = "/api/frequencia";
+    public static final String FREQUENCY_BATCH_CREATE = "/api/frequencia/batch-create";
+    public static final String FREQUENCY_DELETE = "/api/frequencia/delete";
+    public static final String FREQUENCY_SEARCH = "/api/frequencia/search";
     public static final String FREQUENCY_ID = "/api/frequencia/{id}";
 
 }
