@@ -1,5 +1,6 @@
 package com.user.managament.services.impl;
 
+import com.user.managament.DTO.classroom.ClassroomHoursAvailable;
 import com.user.managament.DTO.classroom.ClassroomToCreateDTO;
 import com.user.managament.DTO.classroom.ClassroomWithCountDTO;
 import com.user.managament.exception.ClassroomDoesntExistsException;
@@ -40,6 +41,11 @@ public class ClassroomServiceImpl implements ClassroomService {
     @Override
     public void deleteClassroomById(UUID classroomId) {
         this.classroomRepository.deleteById(classroomId);
+    }
+
+    @Override
+    public List<ClassroomHoursAvailable> findClassesHoursAvailable() {
+        return this.classroomRepository.findClassesHoursAvailable();
     }
 
     @Transactional
