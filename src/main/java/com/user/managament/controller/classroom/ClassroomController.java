@@ -1,5 +1,6 @@
-package com.user.managament.controller;
+package com.user.managament.controller.classroom;
 
+import com.user.managament.DTO.classroom.ClassroomHoursAvailable;
 import com.user.managament.DTO.classroom.ClassroomToCreateDTO;
 import com.user.managament.DTO.classroom.ClassroomWithCountDTO;
 import com.user.managament.config.EndPointsAPI;
@@ -37,6 +38,12 @@ public class ClassroomController {
     @GetMapping("/today-classes")
     public ResponseEntity<List<ClassroomWithCountDTO>> getClassWithCount() {
         List<ClassroomWithCountDTO> classWithCount =  classroomService.findClassroomsWithStudents(LocalDate.now());
+        return ResponseEntity.status(HttpStatus.OK).body(classWithCount);
+    }
+
+    @GetMapping("/hours-available")
+    public ResponseEntity<List<ClassroomHoursAvailable>> getClassesHours() {
+        List<ClassroomHoursAvailable> classWithCount =  classroomService.findClassesHoursAvailable();
         return ResponseEntity.status(HttpStatus.OK).body(classWithCount);
     }
 
