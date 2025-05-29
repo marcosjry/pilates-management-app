@@ -12,6 +12,7 @@ public class EndPointsAPI {
     public static final String AUTH_DENIED = "/api/auth/access-error";
 
     public static final String CUSTOMER = "/api/aluno";
+    public static final String CUSTOMERS_AVAILABLE = "/api/aluno/available";
     public static final String CUSTOMER_SEARCH = "/api/aluno/search";
     public static final String CUSTOMER_FILTER = "/api/aluno/filter";
     public static final String CUSTOMER_ID = "/api/aluno/{customerId}";
@@ -22,6 +23,7 @@ public class EndPointsAPI {
     public static final String CONTRACTS_OF_USER = "/api/contrato/{customerId}";
     public static final String CONTRACT_ID = "/api/contrato/{contractId}";
     public static final String CONTRACT_LAST_BY_USER = "/api/contrato/last/{customerId}";
+    public static final String CONTRACT_LAST_INFO_USER = "/api/contrato/info-user/{customerId}";
     public static final String CONTRACTS_EXPIRING = "/api/contrato/expiring-contracts";
 
     public static final String CLASSROOM = "/api/turma";
