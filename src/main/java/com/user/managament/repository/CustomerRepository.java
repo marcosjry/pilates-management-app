@@ -1,6 +1,7 @@
 package com.user.managament.repository;
 
 import com.user.managament.DTO.customer.CustomersContractStatusDTO;
+import com.user.managament.DTO.customer.CustomersFrequencyClassDTO;
 import com.user.managament.model.classroom.ClassroomType;
 import com.user.managament.model.contract.ContractStatus;
 import com.user.managament.model.contract.PaymentType;
@@ -43,6 +44,22 @@ public interface CustomerRepository extends JpaRepository<Customer, UUID>, JpaSp
     List<CustomersContractStatusDTO> findCustomerContractsDTOByFilters(
             @Param("roomType") ClassroomType roomType,
             @Param("status") ContractStatus status,
+            @Param("pType") PaymentType pType,
+            @Param("name") String name
+    );
+
+    @Query("SELECT new com.user.managament.DTO.customer.CustomersFrequencyClassDTO(" +
+            "c.id, c.name, c.classroomType)" +
+            "FROM Customer c " +
+            "LEFT JOIN Contract last_contract ON last_contract.customer = c " +
+            "AND last_contract.initDate = (SELECT MAX(c_sub.initDate) FROM Contract c_sub WHERE c_sub.customer = c) " +
+            "WHERE (:roomType IS NULL OR c.classroomType = :roomType) " +
+            "AND (:name IS NULL OR LOWER(CAST(c.name AS string)) LIKE LOWER(CONCAT('%', :name, '%'))) " +
+            "AND (:pType IS NULL OR last_contract.paymentType = :pType)" +
+            "AND (last_contract.contractStatus = ACTIVE)"
+    )
+    List<CustomersFrequencyClassDTO> findAvailableCustomersDTO(
+            @Param("roomType") ClassroomType roomType,
             @Param("pType") PaymentType pType,
             @Param("name") String name
     );

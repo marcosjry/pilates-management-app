@@ -1,5 +1,6 @@
 package com.user.managament.services;
 
+import com.user.managament.DTO.classroom.ClassroomHoursAvailable;
 import com.user.managament.DTO.classroom.ClassroomToCreateDTO;
 import com.user.managament.DTO.classroom.ClassroomWithCountDTO;
 import com.user.managament.DTO.classroom.ReqClassroomWithCountDTO;
@@ -20,5 +21,6 @@ public interface ClassroomService {
     List<ClassroomWithCountDTO> findClassroomsWithStudents(LocalDate date);
     void deleteClassroomById(UUID classroomId);
 
+    List<ClassroomHoursAvailable> findClassesHoursAvailable();
 
 }
