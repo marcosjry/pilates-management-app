@@ -1,4 +1,4 @@
-package com.user.managament.controller;
+package com.user.managament.controller.contract;
 
 import com.user.managament.DTO.contract.*;
 import com.user.managament.config.EndPointsAPI;

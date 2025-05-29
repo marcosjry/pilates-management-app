@@ -40,4 +40,6 @@ public interface FrequencyClassRepository extends JpaRepository<ClassroomFrequen
             LocalDate classroomDate,
             LocalTime startTime
     );
+
+    void deleteByCustomerIdAndClassroomId(UUID customerId, UUID classroomId);
 }

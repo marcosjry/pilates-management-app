@@ -8,6 +8,15 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
+@Table(
+        name = "classroom_frequency", // O nome real da sua tabela
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "uq_aluno_turma_data",
+                        columnNames = {"customer_id", "classroom_id", "classroom_date"}
+                )
+        }
+)
 public class ClassroomFrequency {
 
     public ClassroomFrequency(Classroom classroom, Customer customer, LocalDate classroomDate) {
