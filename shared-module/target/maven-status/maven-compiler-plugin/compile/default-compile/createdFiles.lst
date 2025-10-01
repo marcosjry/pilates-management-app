@@ -1,0 +1,5 @@
+com\user\managament\shared\util\SharedUtilClass.class
+com\user\managament\shared\model\classroom\ClassroomType.class
+com\user\managament\shared\util\PageResponse.class
+com\user\managament\shared\model\contract\ContractStatus.class
+com\user\managament\shared\model\contract\PaymentType.class

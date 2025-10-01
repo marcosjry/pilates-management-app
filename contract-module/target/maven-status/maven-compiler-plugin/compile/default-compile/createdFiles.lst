@@ -1,0 +1,14 @@
+com\user\managament\contract\model\Contract.class
+com\user\managament\contract\dto\ContractsExpiring.class
+com\user\managament\contract\dto\ContractsAndCustomerDTO.class
+com\user\managament\contract\dto\MostRecentlyContractDTO.class
+com\user\managament\contract\controller\ContractController.class
+com\user\managament\contract\dto\ActiveContractsWithCustomersDTO.class
+com\user\managament\contract\dto\ContractToEditDTO.class
+com\user\managament\contract\repository\ContractRepository.class
+com\user\managament\contract\services\ContractService.class
+com\user\managament\contract\exception\ContractDoesntExistsException.class
+com\user\managament\contract\dto\ContractToCreateDTO.class
+com\user\managament\contract\config\ContractExpirationScheduler.class
+com\user\managament\contract\dto\ContractDTO.class
+com\user\managament\contract\services\impl\ContractServiceImpl.class

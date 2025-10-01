@@ -1,0 +1,13 @@
+E:\Marcos\app-pilates\pilates\customer-module\src\main\java\com\user\managament\customer\controller\CustomerController.java
+E:\Marcos\app-pilates\pilates\customer-module\src\main\java\com\user\managament\customer\dto\CustomerDTO.java
+E:\Marcos\app-pilates\pilates\customer-module\src\main\java\com\user\managament\customer\dto\CustomersContractStatusDTO.java
+E:\Marcos\app-pilates\pilates\customer-module\src\main\java\com\user\managament\customer\dto\CustomersFrequencyClassDTO.java
+E:\Marcos\app-pilates\pilates\customer-module\src\main\java\com\user\managament\customer\dto\CustomerToCreateDTO.java
+E:\Marcos\app-pilates\pilates\customer-module\src\main\java\com\user\managament\customer\dto\CustomerToEdit.java
+E:\Marcos\app-pilates\pilates\customer-module\src\main\java\com\user\managament\customer\dto\FrequencyByDateAndHourDTO.java
+E:\Marcos\app-pilates\pilates\customer-module\src\main\java\com\user\managament\customer\exception\CustomerDoesntExistsException.java
+E:\Marcos\app-pilates\pilates\customer-module\src\main\java\com\user\managament\customer\model\Customer.java
+E:\Marcos\app-pilates\pilates\customer-module\src\main\java\com\user\managament\customer\repository\CustomerRepository.java
+E:\Marcos\app-pilates\pilates\customer-module\src\main\java\com\user\managament\customer\services\CustomerService.java
+E:\Marcos\app-pilates\pilates\customer-module\src\main\java\com\user\managament\customer\services\impl\CustomerServiceImpl.java
+E:\Marcos\app-pilates\pilates\customer-module\src\main\java\com\user\managament\customer\util\EndPointsAPI.java

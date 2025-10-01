@@ -1,0 +1,13 @@
+com\user\managament\customer\dto\CustomersContractStatusDTO.class
+com\user\managament\customer\dto\CustomerToCreateDTO.class
+com\user\managament\customer\dto\CustomerToEdit.class
+com\user\managament\customer\model\Customer.class
+com\user\managament\customer\util\EndPointsAPI.class
+com\user\managament\customer\services\impl\CustomerServiceImpl.class
+com\user\managament\customer\services\CustomerService.class
+com\user\managament\customer\exception\CustomerDoesntExistsException.class
+com\user\managament\customer\dto\FrequencyByDateAndHourDTO.class
+com\user\managament\customer\controller\CustomerController.class
+com\user\managament\customer\dto\CustomersFrequencyClassDTO.class
+com\user\managament\customer\dto\CustomerDTO.class
+com\user\managament\customer\repository\CustomerRepository.class
